@@ -6,24 +6,17 @@
 
 provider "aws" {
   region  = "us-east-1"
-  profile = "ops-payer"
+  profile = ""
 
   assume_role {
-    role_arn = "arn:aws:iam::${local.account_id}:role/OrganizationAccountAccessRole"
+    role_arn = ""
   }
-}
-
-provider "aws" {
-  alias   = "atena"
-  region  = "us-east-1"
-  profile = "atena"
-
 }
 
 terraform {
   backend "s3" {
-    profile                     = "ops-payer"
-    bucket                      = "s3-compasso-uol-424747098912-tfstate"
+    profile                     = ""
+    bucket                      = ""
     key                         = ""
     region                      = "us-east-1"
     encrypt                     = true
@@ -34,7 +27,7 @@ terraform {
 
 locals {
 
-  account_id = "057422990009"
+  account_id = ""
 }
 
 module "api_gateway_integration_sqs" {
