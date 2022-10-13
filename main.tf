@@ -327,22 +327,3 @@ resource "aws_api_gateway_domain_name" "api_domain_name" {
     types = ["REGIONAL"]
   }
 }
-
-#############################################################################
-#
-# Route53 - ECS Cluster EC2 App API PUCRS
-#
-
-data "aws_route53_zone" "edtech" {
-  provider        = aws.atena
-  name            = local.domain_name
-  private_zone    = "false"
-}
-
-resource "aws_route53_record" "route_53_domain_name" {
-  name    = aws_api_gateway_domain_name.api_domain_name.domain_name
-  type    = "CNAME"
-  zone_id = data.aws_route53_zone.edtech.zone_id
-  ttl     = "10"
-  records = [ "${var.endpoint_configuration}" ]
-}
